@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "438419606118",
+    "project_id": "lab12pasco",
+    "storage_bucket": "lab12pasco.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438419606118:android:06434651afafface23bba7",
+        "android_client_info": {
+          "package_name": "com.tiendaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2gAS98rc0jpx3t3zYdQPAWkSPDsqI714"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
