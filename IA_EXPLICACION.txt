@@ -1,0 +1,54 @@
+Uso Responsable de IA
+=====================
+
+Bueno, esto es algo que escribí para recordarme a mí mismo cómo usar la IA de forma responsable.
+
+¿Qué es la IA?
+-------------
+Básicamente, la IA es una herramienta que me ayuda a resolver problemas, escribir código 
+y aprender cosas nuevas. Es súper útil, pero hay que usarla bien.
+
+Lo que tengo que recordar
+-------------------------
+
+1. Siempre revisar lo que me da
+   La IA puede equivocarse, así que siempre verifico la información, especialmente 
+   si es algo importante. No confío ciegamente.
+
+2. Es una ayuda, no un reemplazo
+   La IA me ayuda, pero no reemplaza mi propio aprendizaje. Tengo que seguir 
+   desarrollando mis habilidades y no depender 100% de ella.
+
+3. Cuidar la privacidad
+   No comparto información personal sensible ni datos de otras personas sin 
+   su permiso. Eso es básico.
+
+4. Usarla de forma legal y ética
+   Respeto las leyes, los derechos de autor y la propiedad intelectual. 
+   No uso la IA para hacer cosas que no debería.
+
+5. Ser honesto cuando uso IA
+   Si genero algo con IA, lo menciono cuando sea necesario, especialmente 
+   en trabajos académicos o profesionales.
+
+6. Aprender, no solo copiar
+   No solo copio lo que me da. Trato de entender el código y las explicaciones 
+   para realmente aprender.
+
+7. Yo tengo el control final
+   La IA es solo una herramienta. Las decisiones importantes las tomo yo, 
+   y soy responsable de lo que hago con la información que me da.
+
+Tips que me funcionan
+---------------------
+
+- Reviso el código antes de usarlo, siempre
+- Pruebo las soluciones primero en un lugar seguro
+- Leo las explicaciones y trato de entenderlas
+- Combino lo que me dice la IA con mi propio criterio
+- Mantengo una actitud crítica y cuestiono cuando algo no me cuadra
+
+En resumen
+----------
+La IA es genial y me ayuda mucho, pero tengo que usarla con cabeza. 
+No es magia, es una herramienta, y como toda herramienta, hay que saber usarla bien.

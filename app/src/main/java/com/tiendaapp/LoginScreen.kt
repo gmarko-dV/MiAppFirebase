@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.FirebaseException
 
 @Composable
 fun LoginScreen(
@@ -90,10 +91,20 @@ fun LoginScreen(
                             onLoginSuccess()
                         } else {
                             val exception = task.exception
-                            errorMessage = when (exception) {
-                                is FirebaseAuthInvalidUserException -> "Usuario no encontrado"
-                                is FirebaseAuthInvalidCredentialsException -> "Credenciales incorrectas"
-                                else -> "Error al iniciar sesión: ${exception?.message}"
+                            val errorMsg = exception?.message ?: ""
+                            errorMessage = when {
+                                exception is FirebaseAuthInvalidUserException -> 
+                                    "Usuario no encontrado. Verifica tu email."
+                                exception is FirebaseAuthInvalidCredentialsException -> 
+                                    "Credenciales incorrectas. Verifica tu email y contraseña."
+                                errorMsg.contains("network", ignoreCase = true) ||
+                                errorMsg.contains("timeout", ignoreCase = true) ||
+                                errorMsg.contains("unreachable", ignoreCase = true) ||
+                                errorMsg.contains("interrupted connection", ignoreCase = true) ||
+                                errorMsg.contains("Unable to resolve host", ignoreCase = true) ->
+                                    "Error de conexión. Verifica tu conexión a internet e intenta nuevamente."
+                                else -> 
+                                    "Error al iniciar sesión: ${errorMsg.ifEmpty { "Error desconocido" }}"
                             }
                         }
                     }

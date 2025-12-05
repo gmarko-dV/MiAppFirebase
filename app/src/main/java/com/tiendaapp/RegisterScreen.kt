@@ -116,10 +116,20 @@ fun RegisterScreen(
                             onRegisterSuccess()
                         } else {
                             val exception = task.exception
-                            errorMessage = when (exception) {
-                                is FirebaseAuthWeakPasswordException -> "La contraseña es muy débil"
-                                is FirebaseAuthUserCollisionException -> "Este email ya está registrado"
-                                else -> "Error al registrar: ${exception?.message ?: "Error desconocido"}"
+                            val errorMsg = exception?.message ?: ""
+                            errorMessage = when {
+                                exception is FirebaseAuthWeakPasswordException -> 
+                                    "La contraseña es muy débil. Debe tener al menos 6 caracteres."
+                                exception is FirebaseAuthUserCollisionException -> 
+                                    "Este email ya está registrado. Inicia sesión en su lugar."
+                                errorMsg.contains("network", ignoreCase = true) ||
+                                errorMsg.contains("timeout", ignoreCase = true) ||
+                                errorMsg.contains("unreachable", ignoreCase = true) ||
+                                errorMsg.contains("interrupted connection", ignoreCase = true) ||
+                                errorMsg.contains("Unable to resolve host", ignoreCase = true) ->
+                                    "Error de conexión. Verifica tu conexión a internet e intenta nuevamente."
+                                else -> 
+                                    "Error al registrar: ${errorMsg.ifEmpty { "Error desconocido" }}"
                             }
                         }
                     }

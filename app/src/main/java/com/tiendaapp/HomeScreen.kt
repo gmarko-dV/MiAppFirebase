@@ -148,14 +148,13 @@ fun HomeScreen(
                 mensaje = null
 
                 val producto = Producto(
-                    codigo = codigo,
-                    cantidad = cantidadInt,
+                    nombre = if (descripcion.isNotBlank()) "$codigo - $descripcion" else codigo,
+                    stock = cantidadInt,
                     categoria = categoria,
-                    descripcion = descripcion,
                     userId = user?.uid ?: ""
                 )
 
-                Log.d("HomeScreen", "Intentando registrar producto: ${producto.codigo}")
+                Log.d("HomeScreen", "Intentando registrar producto: ${producto.nombre}")
 
                 try {
                     db.collection("productos")
