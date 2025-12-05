@@ -1,22 +1,20 @@
 package com.tiendaapp
 
 data class Producto(
-    val codigo: String = "",
-    val cantidad: Int = 0,
+    val id: String = "",
+    val nombre: String = "",
+    val precio: Double = 0.0,
+    val stock: Int = 0,
     val categoria: String = "",
-    val descripcion: String = "",
-    val userId: String = "",
-    val fechaCreacion: Long = System.currentTimeMillis()
+    val userId: String = ""
 ) {
     fun toMap(): Map<String, Any> {
         return mapOf(
-            "codigo" to codigo,
-            "cantidad" to cantidad,
+            "nombre" to nombre,
+            "precio" to precio,
+            "stock" to stock,
             "categoria" to categoria,
-            "descripcion" to descripcion,
-            "userId" to userId,
-            "fechaCreacion" to fechaCreacion
+            "userId" to userId
         )
     }
 }
-

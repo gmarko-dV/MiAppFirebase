@@ -1,39 +1,26 @@
 package com.tiendaapp
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun AuthApp() {
     val navController = rememberNavController()
-    var user by remember { mutableStateOf<FirebaseUser?>(null) }
     val auth = FirebaseAuth.getInstance()
-
-    // Observar cambios en el estado de autenticación
-    LaunchedEffect(Unit) {
-        auth.addAuthStateListener { firebaseAuth ->
-            user = firebaseAuth.currentUser
-        }
-    }
 
     NavHost(
         navController = navController,
-        startDestination = if (user != null) "home" else "login"
+        startDestination = "login"
     ) {
         composable("login") {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate("home") {
+                    navController.navigate("productList") {
                         popUpTo("login") { inclusive = true }
                     }
                 },
@@ -42,10 +29,11 @@ fun AuthApp() {
                 }
             )
         }
+
         composable("register") {
             RegisterScreen(
                 onRegisterSuccess = {
-                    navController.navigate("home") {
+                    navController.navigate("productList") {
                         popUpTo("register") { inclusive = true }
                     }
                 },
@@ -56,16 +44,30 @@ fun AuthApp() {
                 }
             )
         }
-        composable("home") {
-            HomeScreen(
+
+        composable("productList") {
+            ProductListScreen(
+                onAddProduct = { navController.navigate("addProduct") },
+                onEditProduct = { id -> navController.navigate("editProduct/$id") },
                 onLogout = {
                     auth.signOut()
                     navController.navigate("login") {
-                        popUpTo("home") { inclusive = true }
+                        popUpTo("productList") { inclusive = true }
                     }
                 }
             )
         }
+
+        composable("addProduct") {
+            AddProductScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable(
+            route = "editProduct/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId") ?: ""
+            EditProductScreen(productId = productId, onBack = { navController.popBackStack() })
+        }
     }
 }
-

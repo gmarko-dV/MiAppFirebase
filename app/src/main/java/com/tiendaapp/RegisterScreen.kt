@@ -109,35 +109,20 @@ fun RegisterScreen(
                 isLoading = true
                 errorMessage = null
                 
-                try {
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            isLoading = false
-                            if (task.isSuccessful) {
-                                onRegisterSuccess()
-                            } else {
-                                val exception = task.exception
-                                errorMessage = when {
-                                    exception is FirebaseAuthWeakPasswordException -> "La contraseña es muy débil"
-                                    exception is FirebaseAuthUserCollisionException -> "Este email ya está registrado"
-                                    exception?.message?.contains("CONFIGURATION_NOT_FOUND") == true -> 
-                                        "Error de configuración. Verifica que Email/Password esté habilitado en Firebase Console"
-                                    else -> "Error al registrar: ${exception?.message ?: "Error desconocido"}"
-                                }
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        isLoading = false
+                        if (task.isSuccessful) {
+                            onRegisterSuccess()
+                        } else {
+                            val exception = task.exception
+                            errorMessage = when (exception) {
+                                is FirebaseAuthWeakPasswordException -> "La contraseña es muy débil"
+                                is FirebaseAuthUserCollisionException -> "Este email ya está registrado"
+                                else -> "Error al registrar: ${exception?.message ?: "Error desconocido"}"
                             }
                         }
-                        .addOnFailureListener { exception ->
-                            isLoading = false
-                            errorMessage = when {
-                                exception.message?.contains("CONFIGURATION_NOT_FOUND") == true -> 
-                                    "Error: El método Email/Password no está habilitado en Firebase Console. Por favor, habilítalo en Authentication > Sign-in method"
-                                else -> "Error al registrar: ${exception.message ?: "Error desconocido"}"
-                            }
-                        }
-                } catch (e: Exception) {
-                    isLoading = false
-                    errorMessage = "Error: ${e.message}"
-                }
+                    }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -164,4 +149,3 @@ fun RegisterScreen(
         }
     }
 }
-
